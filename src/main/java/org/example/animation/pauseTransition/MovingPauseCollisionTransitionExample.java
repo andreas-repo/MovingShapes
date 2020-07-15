@@ -107,8 +107,7 @@ public class MovingPauseCollisionTransitionExample extends Application {
 
         translateTransition2.setAutoReverse(false);
 
-        Bounds objA = circle.localToScene(circle.getBoundsInLocal());
-        Bounds objB = circle2.localToScene(circle2.getBoundsInLocal());
+
 
 
 
@@ -123,6 +122,10 @@ public class MovingPauseCollisionTransitionExample extends Application {
         //Playing the animation
         sequentialTransition.play();
         sequentialTransition2.play();
+
+        Bounds objA = circle.localToScene(circle.getBoundsInLocal());
+        Bounds objB = circle2.localToScene(circle2.getBoundsInLocal());
+
         if (objA.intersects(objB)) {
             System.out.println("INTERSECTING!!!");
         }

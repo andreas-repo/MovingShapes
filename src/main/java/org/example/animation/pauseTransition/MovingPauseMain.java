@@ -1,6 +1,6 @@
 package org.example.animation.pauseTransition;
 
-public class MovingCollisionMain {
+public class MovingPauseMain {
     public static void main(String[] args) {
         MovingPauseTransitionExample.main(args);
     }
