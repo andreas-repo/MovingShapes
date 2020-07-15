@@ -87,7 +87,7 @@ public class MovingPauseTransitionExample extends Application {
         Group root = new Group(circle);
 
         //Creating a scene object
-        Scene scene = new Scene(root, 600, 300);
+        Scene scene = new Scene(root, 600, 600);
 
         //Setting title to the Stage
         stage.setTitle("Pause transition example");
