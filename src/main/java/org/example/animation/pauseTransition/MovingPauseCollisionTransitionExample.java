@@ -4,6 +4,7 @@ import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -11,7 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MovingPauseTransitionExample extends Application {
+public class MovingPauseCollisionTransitionExample extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Circle circle = new Circle();
@@ -19,7 +20,7 @@ public class MovingPauseTransitionExample extends Application {
         circle.setCenterX(300.0f);
         circle.setCenterY(130.0f);
 
-        circle.setRadius(50.0f);
+        circle.setRadius(25.0f);
 
         circle.setFill(Color.FORESTGREEN);
 
@@ -75,6 +76,43 @@ public class MovingPauseTransitionExample extends Application {
         translateTransitionMoveUp.setAutoReverse(false);
 
 
+        /**
+         * obstacle
+         */
+        Circle circle2 = new Circle();
+
+        circle2.setCenterX(300.0f);
+        circle2.setCenterY(260.0f);
+
+        circle2.setRadius(50.0f);
+
+        circle2.setFill(Color.BLUE);
+
+        circle2.setStrokeWidth(20);
+
+        PauseTransition pauseTransition2 = new PauseTransition();
+
+        pauseTransition2.setDuration(Duration.millis(1000));
+
+        TranslateTransition translateTransition2 = new TranslateTransition();
+
+        translateTransition2.setDuration(Duration.millis(1000));
+
+        translateTransition2.setNode(circle);
+
+        translateTransition2.setByY(300);
+        translateTransition2.setByY(130);
+
+        translateTransition2.setCycleCount(1);
+
+        translateTransition2.setAutoReverse(false);
+
+        Bounds objA = circle.localToScene(circle.getBoundsInLocal());
+        Bounds objB = circle2.localToScene(circle2.getBoundsInLocal());
+
+
+
+        SequentialTransition sequentialTransition2 = new SequentialTransition(circle2, translateTransition2);
 
 
 
@@ -84,9 +122,13 @@ public class MovingPauseTransitionExample extends Application {
 
         //Playing the animation
         sequentialTransition.play();
+        sequentialTransition2.play();
+        if (objA.intersects(objB)) {
+            System.out.println("INTERSECTING!!!");
+        }
 
         //Creating a Group object
-        Group root = new Group(circle);
+        Group root = new Group(circle, circle2);
 
         //Creating a scene object
         Scene scene = new Scene(root, 600, 300);
