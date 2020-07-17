@@ -4,6 +4,10 @@ import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.concurrent.Callable;
 
 public class MovingPauseCollisionTransitionExample extends Application {
     @Override
@@ -100,20 +106,14 @@ public class MovingPauseCollisionTransitionExample extends Application {
 
         translateTransition2.setNode(circle);
 
-        translateTransition2.setByY(300);
+        translateTransition2.setByX(300);
         translateTransition2.setByY(130);
 
         translateTransition2.setCycleCount(1);
 
         translateTransition2.setAutoReverse(false);
 
-
-
-
-
         SequentialTransition sequentialTransition2 = new SequentialTransition(circle2, translateTransition2);
-
-
 
         //Applying Sequential transition to the circle
         SequentialTransition sequentialTransition = new SequentialTransition(
@@ -123,12 +123,6 @@ public class MovingPauseCollisionTransitionExample extends Application {
         sequentialTransition.play();
         sequentialTransition2.play();
 
-        Bounds objA = circle.localToScene(circle.getBoundsInLocal());
-        Bounds objB = circle2.localToScene(circle2.getBoundsInLocal());
-
-        if (objA.intersects(objB)) {
-            System.out.println("INTERSECTING!!!");
-        }
 
         //Creating a Group object
         Group root = new Group(circle, circle2);
